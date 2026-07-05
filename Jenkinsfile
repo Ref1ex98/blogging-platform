@@ -29,17 +29,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy') {
-            steps {
-                sh '''
-                ssh -o StrictHostKeyChecking=no -i ~/.ssh/mumbai.pem ubuntu@10.0.2.196 "
-                docker rm -f blog || true
-                docker pull ref1ex98/blogging-platform:latest
-                docker run -d --name blog -p 80:80 ref1ex98/blogging-platform:latest
-                "
-                '''
-            }
-        }
     }
 }
